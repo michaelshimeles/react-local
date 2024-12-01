@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useDeleteItem } from "@/hooks/useDeleteItem";
-import { useSyncItems } from "@/hooks/useSyncItems";
+// import { useDeleteItem } from "@/hooks/useDeleteItem";
+// import { useSyncItems } from "@/hooks/useSyncItems";
 import db from "@/local/db";
 // import { ProtectedRoute } from "@/protected-route";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -15,8 +15,8 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [name, setName] = useState("");
-  const { mutate: syncItems } = useSyncItems();
-  const { mutate: deleteItem } = useDeleteItem();
+  // const { mutate: syncItems } = useSyncItems();
+  // const { mutate: deleteItem } = useDeleteItem();
   const queryClient = useQueryClient();
 
 
@@ -39,13 +39,15 @@ function Index() {
         .toArray();
       if (unsyncedItems.length > 0) {
         console.log("Auto-syncing batch of pending items:", unsyncedItems);
-        syncItems(unsyncedItems);
+        // syncItems(unsyncedItems);
       }
     };
 
     const interval = setInterval(autoSync, 5000); // Batch sync every 5 seconds
     return () => clearInterval(interval);
-  }, [syncItems]);
+  }, [
+    // syncItems
+  ]);
 
   const handleAdd = async (e: any) => {
     e.preventDefault();
@@ -70,7 +72,7 @@ function Index() {
   const handleDelete = async (id: string) => {
     try {
       console.log("Deleting item:", id);
-      await deleteItem(id);
+      // await deleteItem(id);
 
       const items = await db.items.toArray();
       queryClient.setQueryData(["localItems"], items);
@@ -87,7 +89,7 @@ function Index() {
 
     if (unsyncedItems.length > 0) {
       console.log("Manual sync of pending items:", unsyncedItems);
-      syncItems(unsyncedItems);
+      // syncItems(unsyncedItems);
     }
   };
 
