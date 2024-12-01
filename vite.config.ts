@@ -4,10 +4,17 @@ import { VitePWA } from "vite-plugin-pwa";
 import path from "path";
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 
-
 export default defineConfig({
   server: {
     host: '0.0.0.0'
+  },
+  build: {
+    rollupOptions: {
+      input: path.resolve(__dirname, 'index.html')
+    }
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom']
   },
   plugins: [
     react(),
