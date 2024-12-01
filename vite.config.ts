@@ -3,11 +3,12 @@ import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 import path from "path";
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
-import dns from 'node:dns'
 
-dns.setDefaultResultOrder('verbatim')
 
 export default defineConfig({
+  server: {
+    host: '0.0.0.0'
+  },
   plugins: [
     react(),
     TanStackRouterVite(),
