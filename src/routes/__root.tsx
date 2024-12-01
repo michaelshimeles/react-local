@@ -33,4 +33,8 @@ export const Route = createRootRoute({
       <TanStackRouterDevtools />
     </>
   ),
+  beforeLoad: ({ location }) => {
+    const title = location.pathname === '/' ? 'Home' : location.pathname.slice(1).charAt(0).toUpperCase() + location.pathname.slice(2);
+    document.title = `${title} | React Local`;
+  },
 });

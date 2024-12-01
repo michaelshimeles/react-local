@@ -10,7 +10,10 @@ import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({
   component: Index,
-  ssr: true
+  ssr: true,
+  beforeLoad: () => {
+    document.title = 'Home | React Local';
+  }
 });
 
 function Index() {
